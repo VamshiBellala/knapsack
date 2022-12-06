@@ -1,0 +1,29 @@
+def unboundedKnapsack(k, arr):
+    dp=[False]*(k+1)
+    dp[0]=True
+    for v in arr:
+        for i in range(k+1):
+            if dp[i] and i+v<=k:
+                dp[i+v]=True
+    for i in range(k,-1,-1):
+        if dp[i]:
+            return i
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+   
+    t = int(input().strip())
+    while(t):
+        first_multiple_input = input().rstrip().split()
+
+        n = int(first_multiple_input[0])
+
+        k = int(first_multiple_input[1])
+
+        arr = list(map(int, input().rstrip().split()))
+
+        result = unboundedKnapsack(k, arr)
+
+        fptr.write(str(result) + '\n')
+        t-=1
+    fptr.close()
